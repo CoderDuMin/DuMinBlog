@@ -22,9 +22,9 @@ router.get('/login', (req, res) => {
         res.send({code:408, data:'没有此账号',msg:'请求失败' })
       }else{
         if(pwd==user[0].password){
-          let secret="syyyuigfrhygfgi" 
+          let secret="login2021" 
           // 这是加密的key（密钥）,可以是任意的内容，但在开发中一般不写在代码中，而是一个文件
-          let token = jwt.sign({userId:user[0].userId}, secret, {
+          let token = jwt.sign({userId:user[0].userId,userName:user[0].userName}, secret, {
           expiresIn: 60*60*1  // 1小时过期
           });
           res.send({code:200, data:user,msg:'登录成功',token })

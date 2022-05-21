@@ -1,6 +1,6 @@
 const mysql  = require('mysql');  
  
-let connection = mysql.createConnection({     
+let db = mysql.createConnection({     
   host     : 'localhost',       
   user     : 'root',              
   password : '123456',       
@@ -8,6 +8,6 @@ let connection = mysql.createConnection({
   database: 'dumin-blog' 
 }); 
  
-connection.connect();
+db.connect();
 
-module.exports = connection
+module.exports = db
