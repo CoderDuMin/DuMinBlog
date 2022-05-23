@@ -6,9 +6,10 @@ const SECRET_KEY = 'login2021' // 与生成token的密钥要一致!
 const app = express();
 let port = 9527
 
+app.use(express.urlencoded())
+
 // 中间件
 app.use((req,res,next)=>{
-  console.log('authorization',!req.headers.authorization)
   //验证是否携带token
   if(!req.headers.authorization ){
     if(!req.path.includes('/login')){
@@ -26,7 +27,7 @@ app.use(
       secret: SECRET_KEY,
       requestProperty:'auth',
       algorithms: ['HS256'], // 使用何种加密算法解析
-  }).unless({ path: ['/login/login'] }) // 登录页无需校验
+  }).unless({ path: ['/login/login','/login/register'] }) // 登录页无需校验
 )
 
 

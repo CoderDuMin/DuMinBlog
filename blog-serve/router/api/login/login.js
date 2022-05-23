@@ -1,6 +1,7 @@
 // @login & register
 const express = require('express');
 const connection = require('../../../sqlserve/index')
+const {registerUser} =require('../../../model/user/user')
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
@@ -40,6 +41,17 @@ router.get('/login', (req, res) => {
   })
   
 });
+
+router.post('/register',(req,res)=>{
+  registerUser(req.body).then(result=>{
+    console.log(res)
+    res.send({code:200, data:result,msg:'注册成功'})
+  }).catch(err=>{
+    console.log('err',err)
+    res.status(500).send({code:409, data:err,msg:'请求失败' })
+  })
+})
+
 
 
 module.exports = router;
